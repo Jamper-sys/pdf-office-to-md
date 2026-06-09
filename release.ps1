@@ -32,7 +32,7 @@ $ErrorActionPreference = "Stop"
 $repo     = $PSScriptRoot
 $pyw      = Join-Path $repo "convertir_a_md.pyw"
 $verjson  = Join-Path $repo "version.json"
-$onedrive = "C:\Users\javie\OneDrive - Notley Green Primary School\Claude\convertir_a_md.pyw"
+$onedrive = "C:\Users\javie\OneDrive - Notley Green Primary School\Claude\Convertir a Markdown\convertir_a_md.pyw"
 
 # --------------------------------------------------------------- localizar gh
 

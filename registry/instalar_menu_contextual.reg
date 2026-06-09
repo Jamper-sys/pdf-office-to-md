@@ -12,81 +12,81 @@ Windows Registry Editor Version 5.00
 "Icon"="C:\\Users\\javie\\AppData\\Local\\Programs\\Python\\Python312\\pythonw.exe"
 
 [HKEY_CURRENT_USER\Software\Classes\SystemFileAssociations\.pdf\Shell\ConvertirAMd\command]
-@="\"C:\\Users\\javie\\AppData\\Local\\Programs\\Python\\Python312\\pythonw.exe\" \"C:\\Users\\javie\\OneDrive - Notley Green Primary School\\Claude\\convertir_a_md.pyw\" \"%1\""
+@="\"C:\\Users\\javie\\AppData\\Local\\Programs\\Python\\Python312\\pythonw.exe\" \"C:\\Users\\javie\\OneDrive - Notley Green Primary School\\Claude\\Convertir a Markdown\\convertir_a_md.pyw\" \"%1\""
 
 [HKEY_CURRENT_USER\Software\Classes\SystemFileAssociations\.docx\Shell\ConvertirAMd]
 @="Convertir a Markdown"
 "Icon"="C:\\Users\\javie\\AppData\\Local\\Programs\\Python\\Python312\\pythonw.exe"
 
 [HKEY_CURRENT_USER\Software\Classes\SystemFileAssociations\.docx\Shell\ConvertirAMd\command]
-@="\"C:\\Users\\javie\\AppData\\Local\\Programs\\Python\\Python312\\pythonw.exe\" \"C:\\Users\\javie\\OneDrive - Notley Green Primary School\\Claude\\convertir_a_md.pyw\" \"%1\""
+@="\"C:\\Users\\javie\\AppData\\Local\\Programs\\Python\\Python312\\pythonw.exe\" \"C:\\Users\\javie\\OneDrive - Notley Green Primary School\\Claude\\Convertir a Markdown\\convertir_a_md.pyw\" \"%1\""
 
 [HKEY_CURRENT_USER\Software\Classes\SystemFileAssociations\.doc\Shell\ConvertirAMd]
 @="Convertir a Markdown"
 "Icon"="C:\\Users\\javie\\AppData\\Local\\Programs\\Python\\Python312\\pythonw.exe"
 
 [HKEY_CURRENT_USER\Software\Classes\SystemFileAssociations\.doc\Shell\ConvertirAMd\command]
-@="\"C:\\Users\\javie\\AppData\\Local\\Programs\\Python\\Python312\\pythonw.exe\" \"C:\\Users\\javie\\OneDrive - Notley Green Primary School\\Claude\\convertir_a_md.pyw\" \"%1\""
+@="\"C:\\Users\\javie\\AppData\\Local\\Programs\\Python\\Python312\\pythonw.exe\" \"C:\\Users\\javie\\OneDrive - Notley Green Primary School\\Claude\\Convertir a Markdown\\convertir_a_md.pyw\" \"%1\""
 
 [HKEY_CURRENT_USER\Software\Classes\SystemFileAssociations\.xlsx\Shell\ConvertirAMd]
 @="Convertir a Markdown"
 "Icon"="C:\\Users\\javie\\AppData\\Local\\Programs\\Python\\Python312\\pythonw.exe"
 
 [HKEY_CURRENT_USER\Software\Classes\SystemFileAssociations\.xlsx\Shell\ConvertirAMd\command]
-@="\"C:\\Users\\javie\\AppData\\Local\\Programs\\Python\\Python312\\pythonw.exe\" \"C:\\Users\\javie\\OneDrive - Notley Green Primary School\\Claude\\convertir_a_md.pyw\" \"%1\""
+@="\"C:\\Users\\javie\\AppData\\Local\\Programs\\Python\\Python312\\pythonw.exe\" \"C:\\Users\\javie\\OneDrive - Notley Green Primary School\\Claude\\Convertir a Markdown\\convertir_a_md.pyw\" \"%1\""
 
 [HKEY_CURRENT_USER\Software\Classes\SystemFileAssociations\.xls\Shell\ConvertirAMd]
 @="Convertir a Markdown"
 "Icon"="C:\\Users\\javie\\AppData\\Local\\Programs\\Python\\Python312\\pythonw.exe"
 
 [HKEY_CURRENT_USER\Software\Classes\SystemFileAssociations\.xls\Shell\ConvertirAMd\command]
-@="\"C:\\Users\\javie\\AppData\\Local\\Programs\\Python\\Python312\\pythonw.exe\" \"C:\\Users\\javie\\OneDrive - Notley Green Primary School\\Claude\\convertir_a_md.pyw\" \"%1\""
+@="\"C:\\Users\\javie\\AppData\\Local\\Programs\\Python\\Python312\\pythonw.exe\" \"C:\\Users\\javie\\OneDrive - Notley Green Primary School\\Claude\\Convertir a Markdown\\convertir_a_md.pyw\" \"%1\""
 
 [HKEY_CURRENT_USER\Software\Classes\SystemFileAssociations\.pptx\Shell\ConvertirAMd]
 @="Convertir a Markdown"
 "Icon"="C:\\Users\\javie\\AppData\\Local\\Programs\\Python\\Python312\\pythonw.exe"
 
 [HKEY_CURRENT_USER\Software\Classes\SystemFileAssociations\.pptx\Shell\ConvertirAMd\command]
-@="\"C:\\Users\\javie\\AppData\\Local\\Programs\\Python\\Python312\\pythonw.exe\" \"C:\\Users\\javie\\OneDrive - Notley Green Primary School\\Claude\\convertir_a_md.pyw\" \"%1\""
+@="\"C:\\Users\\javie\\AppData\\Local\\Programs\\Python\\Python312\\pythonw.exe\" \"C:\\Users\\javie\\OneDrive - Notley Green Primary School\\Claude\\Convertir a Markdown\\convertir_a_md.pyw\" \"%1\""
 
 [HKEY_CURRENT_USER\Software\Classes\SystemFileAssociations\.ppt\Shell\ConvertirAMd]
 @="Convertir a Markdown"
 "Icon"="C:\\Users\\javie\\AppData\\Local\\Programs\\Python\\Python312\\pythonw.exe"
 
 [HKEY_CURRENT_USER\Software\Classes\SystemFileAssociations\.ppt\Shell\ConvertirAMd\command]
-@="\"C:\\Users\\javie\\AppData\\Local\\Programs\\Python\\Python312\\pythonw.exe\" \"C:\\Users\\javie\\OneDrive - Notley Green Primary School\\Claude\\convertir_a_md.pyw\" \"%1\""
+@="\"C:\\Users\\javie\\AppData\\Local\\Programs\\Python\\Python312\\pythonw.exe\" \"C:\\Users\\javie\\OneDrive - Notley Green Primary School\\Claude\\Convertir a Markdown\\convertir_a_md.pyw\" \"%1\""
 
 [HKEY_CURRENT_USER\Software\Classes\SystemFileAssociations\.csv\Shell\ConvertirAMd]
 @="Convertir a Markdown"
 "Icon"="C:\\Users\\javie\\AppData\\Local\\Programs\\Python\\Python312\\pythonw.exe"
 
 [HKEY_CURRENT_USER\Software\Classes\SystemFileAssociations\.csv\Shell\ConvertirAMd\command]
-@="\"C:\\Users\\javie\\AppData\\Local\\Programs\\Python\\Python312\\pythonw.exe\" \"C:\\Users\\javie\\OneDrive - Notley Green Primary School\\Claude\\convertir_a_md.pyw\" \"%1\""
+@="\"C:\\Users\\javie\\AppData\\Local\\Programs\\Python\\Python312\\pythonw.exe\" \"C:\\Users\\javie\\OneDrive - Notley Green Primary School\\Claude\\Convertir a Markdown\\convertir_a_md.pyw\" \"%1\""
 
 [HKEY_CURRENT_USER\Software\Classes\SystemFileAssociations\.epub\Shell\ConvertirAMd]
 @="Convertir a Markdown"
 "Icon"="C:\\Users\\javie\\AppData\\Local\\Programs\\Python\\Python312\\pythonw.exe"
 
 [HKEY_CURRENT_USER\Software\Classes\SystemFileAssociations\.epub\Shell\ConvertirAMd\command]
-@="\"C:\\Users\\javie\\AppData\\Local\\Programs\\Python\\Python312\\pythonw.exe\" \"C:\\Users\\javie\\OneDrive - Notley Green Primary School\\Claude\\convertir_a_md.pyw\" \"%1\""
+@="\"C:\\Users\\javie\\AppData\\Local\\Programs\\Python\\Python312\\pythonw.exe\" \"C:\\Users\\javie\\OneDrive - Notley Green Primary School\\Claude\\Convertir a Markdown\\convertir_a_md.pyw\" \"%1\""
 
 [HKEY_CURRENT_USER\Software\Classes\SystemFileAssociations\.html\Shell\ConvertirAMd]
 @="Convertir a Markdown"
 "Icon"="C:\\Users\\javie\\AppData\\Local\\Programs\\Python\\Python312\\pythonw.exe"
 
 [HKEY_CURRENT_USER\Software\Classes\SystemFileAssociations\.html\Shell\ConvertirAMd\command]
-@="\"C:\\Users\\javie\\AppData\\Local\\Programs\\Python\\Python312\\pythonw.exe\" \"C:\\Users\\javie\\OneDrive - Notley Green Primary School\\Claude\\convertir_a_md.pyw\" \"%1\""
+@="\"C:\\Users\\javie\\AppData\\Local\\Programs\\Python\\Python312\\pythonw.exe\" \"C:\\Users\\javie\\OneDrive - Notley Green Primary School\\Claude\\Convertir a Markdown\\convertir_a_md.pyw\" \"%1\""
 
 [HKEY_CURRENT_USER\Software\Classes\SystemFileAssociations\.txt\Shell\ConvertirAMd]
 @="Convertir a Markdown"
 "Icon"="C:\\Users\\javie\\AppData\\Local\\Programs\\Python\\Python312\\pythonw.exe"
 
 [HKEY_CURRENT_USER\Software\Classes\SystemFileAssociations\.txt\Shell\ConvertirAMd\command]
-@="\"C:\\Users\\javie\\AppData\\Local\\Programs\\Python\\Python312\\pythonw.exe\" \"C:\\Users\\javie\\OneDrive - Notley Green Primary School\\Claude\\convertir_a_md.pyw\" \"%1\""
+@="\"C:\\Users\\javie\\AppData\\Local\\Programs\\Python\\Python312\\pythonw.exe\" \"C:\\Users\\javie\\OneDrive - Notley Green Primary School\\Claude\\Convertir a Markdown\\convertir_a_md.pyw\" \"%1\""
 
 [HKEY_CURRENT_USER\Software\Classes\SystemFileAssociations\.rtf\Shell\ConvertirAMd]
 @="Convertir a Markdown"
 "Icon"="C:\\Users\\javie\\AppData\\Local\\Programs\\Python\\Python312\\pythonw.exe"
 
 [HKEY_CURRENT_USER\Software\Classes\SystemFileAssociations\.rtf\Shell\ConvertirAMd\command]
-@="\"C:\\Users\\javie\\AppData\\Local\\Programs\\Python\\Python312\\pythonw.exe\" \"C:\\Users\\javie\\OneDrive - Notley Green Primary School\\Claude\\convertir_a_md.pyw\" \"%1\""
+@="\"C:\\Users\\javie\\AppData\\Local\\Programs\\Python\\Python312\\pythonw.exe\" \"C:\\Users\\javie\\OneDrive - Notley Green Primary School\\Claude\\Convertir a Markdown\\convertir_a_md.pyw\" \"%1\""
