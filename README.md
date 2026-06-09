@@ -81,6 +81,35 @@ function pdf2md {
 }
 ```
 
+## Publicar una nueva versión
+
+Hay un script que automatiza todo el ciclo (bump de versión, sincronización
+a OneDrive, commit, push y publicación del release con el `.pyw` adjunto):
+
+```powershell
+cd C:\Users\javie\Repos\pdf-office-to-md
+.\release.ps1 -Version "1.3.0" -Notes "Soporte para .odt. Corregido bug X."
+```
+
+El script:
+1. Actualiza `__version__` en `convertir_a_md.pyw`.
+2. Reescribe `version.json` con la nueva versión y las notas.
+3. Copia el `.pyw` a tu instalación en OneDrive.
+4. Hace `git add`, `commit` y `push`.
+5. Crea un release `vX.Y.Z` en GitHub con el `.pyw` como descarga.
+
+La app instalada detecta el nuevo `version.json` en cuanto se reabre.
+
+## CI
+
+Cada push y cada PR a `main` ejecuta `.github/workflows/ci.yml` en GitHub
+Actions:
+
+- `py_compile` sobre `convertir_a_md.pyw` y `pdf_office_to_md.py` (chequeo
+  de sintaxis).
+- Validación del `version.json` (semver y URL).
+- Aviso si `__version__` y `version.json` no coinciden.
+
 ## Licencia
 
 MIT — ver [LICENSE](LICENSE).

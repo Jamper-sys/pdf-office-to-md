@@ -1,0 +1,53 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    name: Validar sintaxis y metadatos
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Compilar (chequeo de sintaxis)
+        run: |
+          python -m py_compile convertir_a_md.pyw
+          python -m py_compile pdf_office_to_md.py
+
+      - name: Validar version.json
+        run: |
+          python - <<'PY'
+          import json, re, sys, pathlib
+          data = json.loads(pathlib.Path("version.json").read_text(encoding="utf-8"))
+          assert "version" in data and re.match(r"^\d+\.\d+\.\d+$", data["version"]), \
+              f"version.json: campo 'version' invalido: {data.get('version')!r}"
+          assert data.get("url", "").startswith("https://"), \
+              "version.json: campo 'url' invalido"
+          print("version.json OK ->", data["version"])
+          PY
+
+      - name: Comprobar que __version__ coincide con version.json
+        run: |
+          python - <<'PY'
+          import json, re, pathlib, sys
+          pyw = pathlib.Path("convertir_a_md.pyw").read_text(encoding="utf-8")
+          m = re.search(r'^__version__\s*=\s*"([^"]+)"', pyw, re.M)
+          assert m, "No se encontro __version__ en convertir_a_md.pyw"
+          app_ver = m.group(1)
+          json_ver = json.loads(pathlib.Path("version.json").read_text(encoding="utf-8"))["version"]
+          if app_ver != json_ver:
+              print(f"::warning::__version__ ({app_ver}) != version.json ({json_ver})")
+          else:
+              print(f"Versiones alineadas: {app_ver}")
+          PY
