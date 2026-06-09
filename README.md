@@ -60,6 +60,13 @@ Markdown**. (En Windows 11, "Mostrar más opciones" primero si no aparece.)
 
 Para quitarlo: `registry\desinstalar_menu_contextual.reg`.
 
+### Accesos directos (Escritorio y Menú Inicio)
+
+Ejecuta `registry\crear_accesos_directos.ps1` (clic derecho → "Ejecutar con
+PowerShell"). Crea un acceso directo "Convertir a Markdown" en el Escritorio
+y en el Menú Inicio. El script se auto-ubica: apunta al `convertir_a_md.pyw`
+que esté en su misma carpeta, así que colócalo junto a la app.
+
 ### CLI
 
 ```powershell
