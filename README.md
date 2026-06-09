@@ -84,10 +84,13 @@ function pdf2md {
 ## Publicar una nueva versión
 
 Hay un script que automatiza todo el ciclo (bump de versión, sincronización
-a OneDrive, commit, push y publicación del release con el `.pyw` adjunto):
+a OneDrive, commit, push y publicación del release con el `.pyw` adjunto).
+El script vive en la carpeta de instalación
+(`...\Claude\Convertir a Markdown\release.ps1`) pero opera sobre este repo
+(la ruta del repo está fijada dentro del propio script):
 
 ```powershell
-cd C:\Users\javie\Repos\pdf-office-to-md
+cd "C:\Users\javie\OneDrive - Notley Green Primary School\Claude\Convertir a Markdown"
 .\release.ps1 -Version "1.3.0" -Notes "Soporte para .odt. Corregido bug X."
 ```
 
