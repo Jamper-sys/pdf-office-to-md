@@ -28,6 +28,8 @@ from __future__ import annotations
 import json
 import os
 import re
+import shutil
+import subprocess
 import sys
 import threading
 import webbrowser
@@ -42,6 +44,16 @@ __version__ = "1.2.0"
 #     "notes":   "Texto corto con novedades (opcional)" }
 # Déjalo en "" para desactivar la comprobación de actualizaciones.
 UPDATE_URL = "https://raw.githubusercontent.com/Jamper-sys/pdf-office-to-md/main/version.json"
+
+# --- Auto-sync del script de accesos directos al repo git (opcional) --------
+# Al abrir la app, si crear_accesos_directos.ps1 (que vive junto a esta app)
+# difiere de la copia versionada en el repo, se copia y se hace commit/push.
+# Es silencioso, corre en segundo plano y NUNCA interrumpe ni rompe la app.
+# Solo actúa en el PC donde existe el repo; en cualquier otro, no hace nada.
+# Pon AUTO_SYNC_SHORTCUT_TO_REPO = False para desactivarlo.
+AUTO_SYNC_SHORTCUT_TO_REPO = True
+REPO_DIR = Path(r"C:\Users\javie\Repos\pdf-office-to-md")
+SHORTCUT_SCRIPT_NAME = "crear_accesos_directos.ps1"
 from tkinter import (
     BooleanVar, StringVar, IntVar, END, Listbox, SINGLE,
     filedialog, messagebox, ttk, scrolledtext,
@@ -196,6 +208,51 @@ def is_newer_version(remote: str, local: str) -> bool:
     return _version_tuple(remote) > _version_tuple(local)
 
 
+def sync_shortcut_script_to_repo() -> None:
+    """Sincroniza crear_accesos_directos.ps1 (junto a la app) hacia el repo git.
+
+    Pensada para ejecutarse en segundo plano al abrir la app. Es totalmente
+    silenciosa y a prueba de fallos: si el repo no existe, si no hay git, si
+    no hay red o si algo sale mal, simplemente no hace nada. Solo crea un
+    commit cuando git detecta un cambio real en ese archivo (sin commits de
+    ruido).
+    """
+    if not AUTO_SYNC_SHORTCUT_TO_REPO:
+        return
+    try:
+        app_dir = Path(__file__).resolve().parent
+        local = app_dir / SHORTCUT_SCRIPT_NAME
+        if not local.exists():
+            return
+        if not (REPO_DIR / ".git").exists():
+            return  # no estamos en el PC del repo: no hacer nada
+
+        repo_copy = REPO_DIR / "registry" / SHORTCUT_SCRIPT_NAME
+        repo_copy.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(local, repo_copy)  # actualiza el working tree del repo
+
+        rel = "registry/" + SHORTCUT_SCRIPT_NAME
+        no_window = 0x08000000  # CREATE_NO_WINDOW: git no abre consola
+
+        def git(*args):
+            return subprocess.run(
+                ["git", *args], cwd=str(REPO_DIR),
+                capture_output=True, text=True, creationflags=no_window,
+                timeout=30,
+            )
+
+        # Si git no ve cambios en ese archivo, no hay nada que hacer.
+        status = git("status", "--porcelain", rel)
+        if not status.stdout.strip():
+            return
+
+        git("commit", rel, "-m",
+            "Auto-sync crear_accesos_directos.ps1 desde la app")
+        git("push")
+    except Exception:
+        pass
+
+
 def looks_like_scanned_pdf(src: Path, md_text: str) -> bool:
     """Heurística: PDF con muy poco texto → probablemente escaneado."""
     if src.suffix.lower() != ".pdf":
@@ -240,6 +297,10 @@ class ConvertirApp:
         if UPDATE_URL:
             threading.Thread(target=self._check_actualizaciones,
                              args=(True,), daemon=True).start()
+
+        # Sincroniza el script de accesos directos al repo (silencioso)
+        threading.Thread(target=sync_shortcut_script_to_repo,
+                         daemon=True).start()
 
         if archivos_iniciales:
             for p in archivos_iniciales:
