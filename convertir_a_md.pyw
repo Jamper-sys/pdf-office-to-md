@@ -41,7 +41,7 @@ __version__ = "1.2.0"
 #     "url":     "https://...página de descarga o release",
 #     "notes":   "Texto corto con novedades (opcional)" }
 # Déjalo en "" para desactivar la comprobación de actualizaciones.
-UPDATE_URL = ""
+UPDATE_URL = "https://raw.githubusercontent.com/Jamper-sys/pdf-office-to-md/main/version.json"
 from tkinter import (
     BooleanVar, StringVar, IntVar, END, Listbox, SINGLE,
     filedialog, messagebox, ttk, scrolledtext,
