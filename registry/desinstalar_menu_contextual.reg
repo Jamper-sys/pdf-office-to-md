@@ -1,0 +1,17 @@
+Windows Registry Editor Version 5.00
+
+; Quita "Convertir a Markdown" del menú contextual.
+; Doble clic y aceptar.
+
+[-HKEY_CURRENT_USER\Software\Classes\SystemFileAssociations\.pdf\Shell\ConvertirAMd]
+[-HKEY_CURRENT_USER\Software\Classes\SystemFileAssociations\.docx\Shell\ConvertirAMd]
+[-HKEY_CURRENT_USER\Software\Classes\SystemFileAssociations\.doc\Shell\ConvertirAMd]
+[-HKEY_CURRENT_USER\Software\Classes\SystemFileAssociations\.xlsx\Shell\ConvertirAMd]
+[-HKEY_CURRENT_USER\Software\Classes\SystemFileAssociations\.xls\Shell\ConvertirAMd]
+[-HKEY_CURRENT_USER\Software\Classes\SystemFileAssociations\.pptx\Shell\ConvertirAMd]
+[-HKEY_CURRENT_USER\Software\Classes\SystemFileAssociations\.ppt\Shell\ConvertirAMd]
+[-HKEY_CURRENT_USER\Software\Classes\SystemFileAssociations\.csv\Shell\ConvertirAMd]
+[-HKEY_CURRENT_USER\Software\Classes\SystemFileAssociations\.epub\Shell\ConvertirAMd]
+[-HKEY_CURRENT_USER\Software\Classes\SystemFileAssociations\.html\Shell\ConvertirAMd]
+[-HKEY_CURRENT_USER\Software\Classes\SystemFileAssociations\.txt\Shell\ConvertirAMd]
+[-HKEY_CURRENT_USER\Software\Classes\SystemFileAssociations\.rtf\Shell\ConvertirAMd]
