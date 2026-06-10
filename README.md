@@ -50,13 +50,16 @@ Doble clic sobre `convertir_a_md.pyw`.
 
 ### Menú contextual de Windows
 
-Doble clic en `registry\instalar_menu_contextual.reg` y acepta. A partir
-de ahí, clic derecho sobre cualquier archivo soportado → **Convertir a
-Markdown**. (En Windows 11, "Mostrar más opciones" primero si no aparece.)
+Ejecuta `registry\instalar_menu_contextual.ps1` (clic derecho → "Ejecutar
+con PowerShell"). A partir de ahí, clic derecho sobre cualquier archivo
+soportado → **Convertir a Markdown**. (En Windows 11, "Mostrar más
+opciones" primero si no aparece.)
 
-> El `.reg` referencia rutas absolutas de tu instalación de Python y de la
-> ubicación del `.pyw`. Si lo mueves de sitio, edítalo o pídele a la app
-> que regenere el `.reg`.
+> El instalador es **auto-localizable**: deriva la ruta del `.pyw` de su
+> propia carpeta, así que debe estar junto a `convertir_a_md.pyw`. Si mueves
+> la carpeta, vuelve a ejecutarlo y las rutas del registro se corrigen solas.
+> (Se sustituyó el antiguo `.reg`, que tenía rutas fijas y se rompía al mover
+> la carpeta.)
 
 Para quitarlo: `registry\desinstalar_menu_contextual.reg`.
 
