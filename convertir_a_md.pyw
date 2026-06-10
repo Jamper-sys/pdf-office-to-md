@@ -293,14 +293,13 @@ class ConvertirApp:
         if DND_AVAILABLE:
             self._activar_dnd()
 
-        # Chequeo silencioso de actualizaciones al arrancar
-        if UPDATE_URL:
-            threading.Thread(target=self._check_actualizaciones,
-                             args=(True,), daemon=True).start()
+        # Tareas de fondo (red + git): se lanzan DESPUÉS de mostrar la ventana
+        # para que el arranque sea inmediato y no compitan con el primer pintado.
+        self.root.after(1500, self._lanzar_tareas_fondo)
 
-        # Sincroniza el script de accesos directos al repo (silencioso)
-        threading.Thread(target=sync_shortcut_script_to_repo,
-                         daemon=True).start()
+        # Asegura que la ventana aparezca al frente (no detrás del Explorador
+        # cuando se abre desde el menú contextual).
+        self.root.after(0, self._traer_al_frente)
 
         if archivos_iniciales:
             for p in archivos_iniciales:
@@ -309,6 +308,30 @@ class ConvertirApp:
             self._refrescar_lista()
 
         root.protocol("WM_DELETE_WINDOW", self._on_close)
+
+    # ----------------------------------------------------- arranque/ventana
+
+    def _traer_al_frente(self) -> None:
+        """Levanta la ventana al frente al abrir (incluido desde el menú
+        contextual, donde si no podría quedar tras el Explorador)."""
+        try:
+            self.root.deiconify()
+            self.root.lift()
+            self.root.attributes("-topmost", True)
+            self.root.after(500, lambda: self.root.attributes("-topmost", False))
+            self.root.focus_force()
+        except Exception:
+            pass
+
+    def _lanzar_tareas_fondo(self) -> None:
+        """Tareas que no deben retrasar el arranque: chequeo de
+        actualizaciones (red) y auto-sync del script de accesos (git).
+        Se ejecutan en hilos demonio, ya con la ventana visible."""
+        if UPDATE_URL:
+            threading.Thread(target=self._check_actualizaciones,
+                             args=(True,), daemon=True).start()
+        threading.Thread(target=sync_shortcut_script_to_repo,
+                         daemon=True).start()
 
     # --------------------------------------------------------------- menú
 
