@@ -54,5 +54,10 @@ Crear-Shortcut (Join-Path $desktop "Convertir a Markdown.lnk")
 $startMenu = [Environment]::GetFolderPath("Programs")
 Crear-Shortcut (Join-Path $startMenu "Convertir a Markdown.lnk")
 
+# 'Enviar a' (clic derecho -> Enviar a -> Convertir a Markdown)
+$sendTo = Join-Path $env:APPDATA "Microsoft\Windows\SendTo"
+Crear-Shortcut (Join-Path $sendTo "Convertir a Markdown.lnk")
+
 Write-Host ""
-Write-Host "Listo. Busca 'Convertir a Markdown' en el menu Inicio o en el Escritorio."
+Write-Host "Listo. Accesos creados en: Escritorio, Menu Inicio y 'Enviar a'."
+Write-Host "Tambien puedes arrastrar archivos sobre el icono del Escritorio."

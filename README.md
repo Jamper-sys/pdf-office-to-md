@@ -61,6 +61,16 @@ opciones" primero si no aparece.)
 > (Se sustituyó el antiguo `.reg`, que tenía rutas fijas y se rompía al mover
 > la carpeta.)
 
+> ⚠️ **Bug conocido de Windows 11 24H2 (build 26100):** en algunas
+> instalaciones, los verbos clásicos del registro se *muestran* en el menú
+> "Mostrar más opciones" pero el clic no los ejecuta (se verificó que el
+> comando jamás llega a invocarse, tanto bajo `SystemFileAssociations` como
+> bajo el ProgID). Si te pasa, usa las alternativas: **"Enviar a" →
+> Convertir a Markdown** o arrastrar archivos al acceso directo del
+> Escritorio (`crear_accesos_directos.ps1` crea los accesos de Escritorio,
+> Menú Inicio y "Enviar a"). Reintenta el menú tras una actualización de
+> Windows.
+
 Para quitarlo: `registry\desinstalar_menu_contextual.reg`.
 
 ### Accesos directos (Escritorio y Menú Inicio)
