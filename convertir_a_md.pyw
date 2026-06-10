@@ -283,6 +283,7 @@ class ConvertirApp:
         self.postprocesar = BooleanVar(value=cfg.get("postprocesar", True))
         self.frontmatter = BooleanVar(value=cfg.get("frontmatter", True))
         self.aviso_ocr = BooleanVar(value=cfg.get("aviso_ocr", True))
+        self.auto_convertir = BooleanVar(value=cfg.get("auto_convertir", True))
 
         self.conversion_en_curso = False
 
@@ -306,6 +307,12 @@ class ConvertirApp:
                 if p.is_file() and p.suffix.lower() in SUPPORTED_EXTS:
                     self.archivos.append(p)
             self._refrescar_lista()
+            # Si llegaron archivos (menú contextual, 'Enviar a', arrastrar
+            # sobre el icono), convertir sin pedir más clics. La espera deja
+            # que la ventana se pinte primero.
+            if self.archivos and self.auto_convertir.get():
+                self.estado.config(text="Convirtiendo automáticamente…")
+                self.root.after(900, self.convertir)
 
         root.protocol("WM_DELETE_WINDOW", self._on_close)
 
@@ -437,6 +444,8 @@ class ConvertirApp:
         ttk.Checkbutton(fila1, text="Guardar junto al archivo original",
                         variable=self.junto_al_original,
                         command=self._toggle_salida).pack(side="left", padx=12)
+        ttk.Checkbutton(fila1, text="Convertir al abrir con archivos",
+                        variable=self.auto_convertir).pack(side="left")
 
         fila2 = ttk.Frame(opciones)
         fila2.pack(fill="x", pady=(4, 0))
@@ -795,6 +804,7 @@ class ConvertirApp:
             "postprocesar": self.postprocesar.get(),
             "frontmatter": self.frontmatter.get(),
             "aviso_ocr": self.aviso_ocr.get(),
+            "auto_convertir": self.auto_convertir.get(),
         })
         self.root.destroy()
 
