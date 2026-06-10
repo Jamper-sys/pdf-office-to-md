@@ -39,6 +39,8 @@ foreach ($ext in $exts) {
     New-Item -Path $base -Force | Out-Null
     New-ItemProperty -Path $base -Name "(default)" -Value "Convertir a Markdown" -PropertyType String -Force | Out-Null
     New-ItemProperty -Path $base -Name "Icon" -Value $pythonw -PropertyType String -Force | Out-Null
+    # Position=Top: coloca la entrada arriba del menu clasico, antes de 'Enviar a'.
+    New-ItemProperty -Path $base -Name "Position" -Value "Top" -PropertyType String -Force | Out-Null
     New-Item -Path $cmd -Force | Out-Null
     New-ItemProperty -Path $cmd -Name "(default)" -Value $command -PropertyType String -Force | Out-Null
     Write-Host "OK  $ext"
