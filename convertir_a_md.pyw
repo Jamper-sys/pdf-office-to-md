@@ -55,7 +55,7 @@ AUTO_SYNC_SHORTCUT_TO_REPO = True
 REPO_DIR = Path(r"C:\Users\javie\Repos\pdf-office-to-md")
 SHORTCUT_SCRIPT_NAME = "crear_accesos_directos.ps1"
 from tkinter import (
-    BooleanVar, StringVar, IntVar, END, Listbox, SINGLE,
+    BooleanVar, StringVar, IntVar, END, Listbox, SINGLE, Toplevel,
     filedialog, messagebox, ttk, scrolledtext,
 )
 
@@ -262,11 +262,49 @@ def looks_like_scanned_pdf(src: Path, md_text: str) -> bool:
     return len(body) < 100
 
 
+# ------------------------------------------------------------------- splash
+
+def _crear_splash(root) -> "Toplevel | None":
+    """Ventanita 'Cargando…' que aparece de inmediato al arrancar.
+
+    Da feedback visual durante el arranque en frío (~10-20 s con Defender/
+    OneDrive) y la primera conversión, para que no parezca que 'no pasa nada'.
+    Es totalmente a prueba de fallos: si algo falla, devuelve None y la app
+    sigue igual. La ventana de la app va withdrawn hasta estar lista.
+    """
+    try:
+        sp = Toplevel(root)
+        sp.overrideredirect(True)               # sin bordes ni barra de título
+        sp.attributes("-topmost", True)
+        w, h = 300, 112
+        sw, sh = sp.winfo_screenwidth(), sp.winfo_screenheight()
+        x, y = (sw - w) // 2, (sh - h) // 2
+        sp.geometry(f"{w}x{h}+{x}+{y}")
+        borde = ttk.Frame(sp, relief="solid", borderwidth=1)
+        borde.pack(fill="both", expand=True)
+        cuerpo = ttk.Frame(borde, padding=16)
+        cuerpo.pack(fill="both", expand=True)
+        ttk.Label(cuerpo, text="Convertir a Markdown",
+                  font=("Segoe UI", 11, "bold")).pack()
+        lbl = ttk.Label(cuerpo, text="Cargando…", font=("Segoe UI", 10))
+        lbl.pack(pady=(6, 0))
+        pb = ttk.Progressbar(cuerpo, mode="indeterminate", length=240)
+        pb.pack(fill="x", pady=(10, 0))
+        pb.start(12)
+        sp._lbl = lbl                            # para actualizar el texto luego
+        sp.update()                              # píntala YA (sin esperar al loop)
+        return sp
+    except Exception:
+        return None
+
+
 # ----------------------------------------------------------------- aplicación
 
 class ConvertirApp:
-    def __init__(self, root, archivos_iniciales: list[Path] | None = None) -> None:
+    def __init__(self, root, archivos_iniciales: list[Path] | None = None,
+                 splash=None) -> None:
         self.root = root
+        self._splash = splash
         root.title("Convertir a Markdown")
         root.geometry("820x540")
         root.minsize(680, 420)
@@ -302,6 +340,7 @@ class ConvertirApp:
         # cuando se abre desde el menú contextual).
         self.root.after(0, self._traer_al_frente)
 
+        auto = False
         if archivos_iniciales:
             for p in archivos_iniciales:
                 if p.is_file() and p.suffix.lower() in SUPPORTED_EXTS:
@@ -311,10 +350,35 @@ class ConvertirApp:
             # sobre el icono), convertir sin pedir más clics. La espera deja
             # que la ventana se pinte primero.
             if self.archivos and self.auto_convertir.get():
+                auto = True
                 self.estado.config(text="Convirtiendo automáticamente…")
+                self._set_splash_text("Convirtiendo…")
                 self.root.after(900, self.convertir)
 
+        # El splash se cierra: en cuanto la ventana está visible si NO hay
+        # auto-conversión; o al terminar la conversión (_fin_conversion) si sí.
+        if self._splash and not auto:
+            self.root.after(250, self._cerrar_splash)
+
         root.protocol("WM_DELETE_WINDOW", self._on_close)
+
+    # ----------------------------------------------------------- splash
+
+    def _set_splash_text(self, txt: str) -> None:
+        try:
+            if self._splash and self._splash._lbl.winfo_exists():
+                self._splash._lbl.config(text=txt)
+                self._splash.update_idletasks()
+        except Exception:
+            pass
+
+    def _cerrar_splash(self) -> None:
+        try:
+            if self._splash:
+                self._splash.destroy()
+        except Exception:
+            pass
+        self._splash = None
 
     # ----------------------------------------------------- arranque/ventana
 
@@ -327,6 +391,10 @@ class ConvertirApp:
             self.root.attributes("-topmost", True)
             self.root.after(500, lambda: self.root.attributes("-topmost", False))
             self.root.focus_force()
+            # El splash debe quedar por encima de la ventana recién traída.
+            if self._splash:
+                self._splash.lift()
+                self._splash.attributes("-topmost", True)
         except Exception:
             pass
 
@@ -754,6 +822,7 @@ class ConvertirApp:
 
     def _fin_conversion(self, ok: int, fail: int, cancelado: bool,
                         ocr_avisos: list[str]) -> None:
+        self._cerrar_splash()   # quita el "Convirtiendo…" antes de cualquier diálogo
         self.conversion_en_curso = False
         self.btn_convertir.config(state="normal")
         self.btn_cancelar.config(state="disabled")
@@ -836,11 +905,13 @@ def main() -> None:
             pass
 
     root = BaseTk()
+    root.withdraw()                    # oculta la ventana hasta que esté lista
     try:
         ttk.Style().theme_use("vista")
     except Exception:
         pass
-    ConvertirApp(root, archivos_iniciales=archivos)
+    splash = _crear_splash(root)       # feedback inmediato durante el arranque
+    ConvertirApp(root, archivos_iniciales=archivos, splash=splash)
     root.mainloop()
 
 
