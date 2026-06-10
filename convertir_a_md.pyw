@@ -36,7 +36,7 @@ import webbrowser
 from datetime import datetime
 from pathlib import Path
 
-__version__ = "1.2.0"
+__version__ = "1.3.0"
 
 # URL a un JSON con el formato:
 #   { "version": "1.3.0",

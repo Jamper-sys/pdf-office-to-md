@@ -1,5 +1,5 @@
 {
-  "version": "1.2.0",
-  "url": "https://github.com/Jamper-sys/pdf-office-to-md/releases/latest",
-  "notes": "Versión inicial pública. App de escritorio + CLI + menú contextual de Windows."
+    "version":  "1.3.0",
+    "url":  "https://github.com/Jamper-sys/pdf-office-to-md/releases/latest",
+    "notes":  "Ventana de carga al arrancar: muestra Cargando y luego Convirtiendo con barra animada, para dar feedback durante el arranque en frio y la conversion. Accesos directos (Escritorio, Menu Inicio y Enviar a) reinstalables con crear_accesos_directos.ps1."
 }
