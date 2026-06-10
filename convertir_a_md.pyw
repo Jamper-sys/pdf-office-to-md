@@ -801,7 +801,21 @@ class ConvertirApp:
 
 # -------------------------------------------------------------------- main
 
+def _log_launch() -> None:
+    """Deja constancia de cada arranque (y sus argumentos) en
+    %APPDATA%\\convertir_a_md\\launch.log. Sirve para confirmar si el menú
+    contextual / 'Enviar a' realmente lanza la app. Silencioso."""
+    try:
+        CONFIG_DIR.mkdir(parents=True, exist_ok=True)
+        with open(CONFIG_DIR / "launch.log", "a", encoding="utf-8") as f:
+            f.write(f"{datetime.now().isoformat(timespec='seconds')}  "
+                    f"argv={sys.argv[1:]}\n")
+    except Exception:
+        pass
+
+
 def main() -> None:
+    _log_launch()
     archivos = []
     for a in sys.argv[1:]:
         try:
